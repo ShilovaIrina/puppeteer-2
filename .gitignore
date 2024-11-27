@@ -1,0 +1,5 @@
+/node_modules
+*.json
+
+# Файлы исключенные из игнорирования
+!package.json
