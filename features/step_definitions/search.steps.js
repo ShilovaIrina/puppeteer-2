@@ -43,5 +43,15 @@ Then('пользователь видит надпись {string}', async functi
   const actual = await findText(this.page, ".ticket__check-title");
   const expected = await string;
   expect(actual).contains(expected);
-  
+});
+
+When('пользователь выбирает фильм, но не выбирает место', async function () {
+  await clickElement(this.page, "[data-time-stamp='1733000400']");
+  return await clickElement(this.page, "[data-seance-id='223']");
+});
+
+Then('пользователь не может нажать кнопку {string}', async function (string) {
+  const acceptinButton = await this.page.$(string);
+  const actual = await acceptinButton.evaluate((btn) => btn.disabled);
+  expect(actual).equal(true);
 });

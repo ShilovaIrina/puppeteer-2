@@ -1,4 +1,4 @@
-const { clickElement, findText,  } = require("./lib/commands.js");
+const { clickElement, findText } = require("./lib/commands.js");
 
 let page;
 
@@ -29,9 +29,10 @@ describe("Cinema tests", () => {
   });
 
   test("Без выбора места, нельзя забронировать билет", async () => {
-    await clickElement(page, "[data-time-stamp='1733000400']");
-    await clickElement(page, "[data-seance-id='223']");
-    const actual = await findText(page, ".acceptin-button");
-    await expect(actual).toHaveAttribute('disabled');
+   await clickElement(page, "[data-time-stamp='1733000400']");
+   await clickElement(page, "[data-seance-id='223']");
+   const acceptinButton = await page.$(".acceptin-button");
+   const actual = await acceptinButton.evaluate((btn) => btn.disabled);
+   expect(actual).toEqual(true);
   });
 });
